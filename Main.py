@@ -2,14 +2,14 @@ import pygame
 from pygame.locals import *
 import Data
 
-WIDTH, HEIGHT = 1200, 800 #1200
 SQ_SIZE =  16 
 MAX_FPS = 15
 
 def main():
+    WIDTH, HEIGHT = 1200, 800
     pygame.init()
 
-    screen = pygame.display.set_mode(( WIDTH, HEIGHT ))
+    screen = pygame.display.set_mode(( WIDTH, HEIGHT ), pygame.RESIZABLE)
     clock = pygame.time.Clock()
 
     pygame.display.set_caption('Jobs to Houses')
@@ -25,29 +25,44 @@ def main():
 
             elif event.type == pygame.MOUSEBUTTONDOWN:
                 location = pygame.mouse.get_pos()
-                col = location[0] // SQ_SIZE
-                row = location[1] // SQ_SIZE
-                squareSelected = (row, col)
+                col = (location[0] - WIDTH / 2) // SQ_SIZE 
+                row = (location[1] - HEIGHT / 2) // SQ_SIZE 
+                cellSelected = (row, col)
 
-                state.setCell(squareSelected)
+                state.setCell(cellSelected)
+                print(cellSelected)
 
+            elif event.type == pygame.VIDEORESIZE:
+                screen.fill(pygame.Color('white'))
+                HEIGHT = screen.get_height()
+                WIDTH = screen.get_width()
+                print(HEIGHT, WIDTH )
+                
         drawState(screen, state)
         clock.tick(MAX_FPS)
         pygame.display.flip()
 
     
 def drawState(screen, state):
-    for r in range( HEIGHT // SQ_SIZE  ):
-        for c in range( WIDTH // SQ_SIZE ):
+    HEIGHT = screen.get_height()
+    WIDTH = screen.get_width()
+    left = (WIDTH / SQ_SIZE / 2) - (WIDTH / SQ_SIZE)
+    right = (WIDTH / SQ_SIZE / 2 )
+    top = (HEIGHT / SQ_SIZE / 2 ) - (HEIGHT / SQ_SIZE)
+    bottom = (HEIGHT / SQ_SIZE / 2)
+
+    for r in range( int(top) -1, int(bottom) +1):
+        for c in range( int(left) -1, int(right) +1):
+
             padding, margin = 0.5, 4
             squareOuter = pygame.Rect(
-                c*SQ_SIZE + padding, 
-                r*SQ_SIZE + padding, 
+                (right+c)*SQ_SIZE + padding, 
+                (bottom+r)*SQ_SIZE + padding, 
                 SQ_SIZE - 2*padding, 
                 SQ_SIZE - 2*padding)
             squareInner = pygame.Rect(
-                c*SQ_SIZE + padding + margin, 
-                r*SQ_SIZE + padding + margin, 
+                (right+c)*SQ_SIZE + padding + margin, 
+                (bottom+r)*SQ_SIZE + padding + margin, 
                 SQ_SIZE - 2*padding - 2*margin, 
                 SQ_SIZE - 2*padding - 2*margin)
             color = state.getCellValue((r,c))

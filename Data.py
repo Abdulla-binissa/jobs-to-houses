@@ -4,7 +4,7 @@ class State():
 
     def __init__(self):
 
-        self.dictionary = {}
+        self.dictionary = {(0,0): 1}
 
     def setCell(self, cellSelected):
         step = 0.3
