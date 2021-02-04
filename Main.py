@@ -16,6 +16,9 @@ def main():
     screen.fill(pygame.Color('white'))
     state = Data.State()
 
+    #state.add((HEIGHT// SQ_SIZE // 2,WIDTH// SQ_SIZE // 2))
+    state.add( (0, 0) )
+
     mainLoop = True
     while mainLoop:
         for event in pygame.event.get():
@@ -29,14 +32,12 @@ def main():
                 row = (location[1] - HEIGHT / 2) // SQ_SIZE 
                 cellSelected = (row, col)
 
-                state.setCell(cellSelected)
-                print(cellSelected)
+                state.cellClicked(cellSelected)
 
             elif event.type == pygame.VIDEORESIZE:
                 screen.fill(pygame.Color('white'))
                 HEIGHT = screen.get_height()
                 WIDTH = screen.get_width()
-                print(HEIGHT, WIDTH )
                 
         drawState(screen, state)
         clock.tick(MAX_FPS)
@@ -46,6 +47,7 @@ def main():
 def drawState(screen, state):
     HEIGHT = screen.get_height()
     WIDTH = screen.get_width()
+
     left = (WIDTH / SQ_SIZE / 2) - (WIDTH / SQ_SIZE)
     right = (WIDTH / SQ_SIZE / 2 )
     top = (HEIGHT / SQ_SIZE / 2 ) - (HEIGHT / SQ_SIZE)
