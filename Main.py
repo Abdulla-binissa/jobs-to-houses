@@ -17,7 +17,7 @@ def main():
     state = Data.State()
 
     #state.add((HEIGHT// SQ_SIZE // 2,WIDTH// SQ_SIZE // 2))
-    state.add( (0, 0) )
+    #state.add( (0, 0) )
 
     mainLoop = True
     while mainLoop:
@@ -75,18 +75,18 @@ def drawState(screen, state):
 # Uses cell value to determine strength of color
 # Green(Values 0 to 1) Red(values -1 to 0) Gray(0)
 def getSquareColor(value):
-    alpha = int( 255 - abs(value)*255  )
-    if value > 0:
-        r = int( (11 + alpha)/2 )
-        g = int( (156 + alpha)/2 )
-        b = int( (49 + alpha)/2 )
-        return pygame.Color(r, g, b)
-    elif value < 0:
-        r = 255
-        g = b = int( (0 + alpha)/2 )
-        return pygame.Color(r, g, b) 
-    else:
+    if value == 0:
         return pygame.Color(200, 200, 200)
+    elif value == 1:
+        return pygame.Color('green')
+    elif value == 2:
+        return pygame.Color('red')
+    elif value == 3:
+        return pygame.Color('blue')
+    elif value == 4:
+        return pygame.Color('yellow')
+    else:
+        return pygame.Color('brown')
         
                 
 

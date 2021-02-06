@@ -7,15 +7,15 @@ class State():
         self.dictionary = {(0,0): 1}
 
     def cellClicked(self, cellSelected):
-        step = 0.3
+        step = 1
         if cellSelected in self.dictionary.keys():
             value = self.dictionary.get(cellSelected)
-            value -= step
-            if value <= -1: 
-                value = 1
+            value += step
+            if value >= 6: 
+                value = 0
             self.dictionary[cellSelected] = round(value, 1)
         else: 
-            self.dictionary[cellSelected] = round(-step, 1)
+            self.dictionary[cellSelected] = round(step, 1)
 
     def getCellValue(self, cellSelected):
         if not cellSelected in self.dictionary.keys():
