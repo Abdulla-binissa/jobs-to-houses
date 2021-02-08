@@ -85,6 +85,18 @@ def getSquareColor(value):
         return pygame.Color('blue')
     elif value == 4:
         return pygame.Color('yellow')
+    elif value == 5:
+        return pygame.Color('beige')
+    elif value == 6:
+        return pygame.Color('coral')
+    elif value == 7:
+        return pygame.Color('darkgray')
+    elif value == 8:
+        return pygame.Color('orange')
+    elif value == 9:
+        return pygame.Color('pink')
+    elif value == 10:
+        return pygame.Color('burlywood')
     else:
         return pygame.Color('brown')
         

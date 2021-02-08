@@ -11,7 +11,7 @@ class State():
         if cellSelected in self.dictionary.keys():
             value = self.dictionary.get(cellSelected)
             value += step
-            if value >= 6: 
+            if value >= 12: 
                 value = 0
             self.dictionary[cellSelected] = round(value, 1)
         else: 
