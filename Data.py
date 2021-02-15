@@ -12,7 +12,7 @@ class State():
             value = self.dictionary.get(cellSelected)
             value -= step
             if value <= -1: 
-                value = 1
+                value = 0
             self.dictionary[cellSelected] = round(value, 1)
         else: 
             self.dictionary[cellSelected] = round(-step, 1)
